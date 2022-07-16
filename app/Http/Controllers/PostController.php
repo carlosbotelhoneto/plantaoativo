@@ -49,6 +49,19 @@ class PostController extends Controller
         return new PostResource( $post );
     }
 
+    
+    /**
+     * Display the specified resource.
+     *
+     * @param  string  $tag
+     * @return \Illuminate\Http\Response
+     */
+    public function tag($tag)
+    {
+        $posts = Post::whereJsonContains('tags', $tag)->get();
+        return PostResource::collection($posts);
+    }
+
     /**
      * Update the specified resource in storage.
      *

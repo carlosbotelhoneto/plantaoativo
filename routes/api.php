@@ -23,6 +23,8 @@ Route::get('posts', [PostController::class, 'index']);
 
 Route::get('post/{id}', [PostController::class, 'show']);
 
+Route::get('post/tag/{id}', [PostController::class, 'tag']);
+
 Route::post('post', [PostController::class, 'store']);
 
 Route::put('post/{id}', [PostController::class, 'update']);

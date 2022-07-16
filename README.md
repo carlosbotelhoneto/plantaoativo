@@ -5,7 +5,7 @@
 
 # Preparação do ambiente
 <br>
-1. C riação do banco de dados (MySQL)<br>
+1. Criação do banco de dados (MySQL)<br>
 mysql -u root -p -e "DROP DATABASE IF EXISTS carlosbotelhoneto;CREATE DATABASE carlosbotelhoneto"<br>
 <br>
 2. Configuração do acesso ao banco<br>
@@ -35,6 +35,10 @@ Cadastrar postagem
 Filtrar postagem utilizando a busca pela ID<br>
 - Método: GET<br>
 - URL: /api/post/{id}<br>
+<br>
+Filtrar postagem utilizando a busca pela TAG<br>
+- Método: GET<br>
+- URL: /api/post/tag/{tag}<br>
 <br>
 Alterar postagem da ID informada:<br>
 - Método: PUT<br>
