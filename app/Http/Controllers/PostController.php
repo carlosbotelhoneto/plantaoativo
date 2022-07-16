@@ -33,7 +33,11 @@ class PostController extends Controller
         $post->tags = json_encode($request->input('tags'));
 
         if( $post->save() ){
-            return new PostResource( $post );
+            return response()->json($post, 201);
+        } else{
+            return response()->json([
+                "message" => "Não foi possíve cadastrar a postagem"
+              ], 404);
         }
     }
 
@@ -45,8 +49,14 @@ class PostController extends Controller
      */
     public function show($id)
     {
-        $post = Post::findOrFail( $id );
-        return new PostResource( $post );
+        $post = Post::find( $id );
+        if( $post ){
+            return new PostResource( $post );
+        } else{
+            return response()->json([
+                "message" => "Registro de id = $id não foi encontrado"
+              ], 404);
+        }
     }
 
     
@@ -59,7 +69,13 @@ class PostController extends Controller
     public function tag($tag)
     {
         $posts = Post::whereJsonContains('tags', $tag)->get();
-        return PostResource::collection($posts);
+        if (sizeof($posts) > 0){
+            return PostResource::collection($posts);
+        } else{
+            return response()->json([
+                "message" => "Não há nenhuma postagem com a tag $tag"
+              ], 404);
+        }
     }
 
     /**
@@ -71,14 +87,18 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $post = Post::findOrFail( $request->id );
-        $post->title = $request->input('title') ? $request->input('title') : $post->title;
-        $post->author = $request->input('author') ? $request->input('author') : $post->author;
-        $post->content = $request->input('content') ? $request->input('content') : $post->content;
-        $post->tags = $request->has('tags') ? json_encode($request->input('tags')) : $post->tags;
-        
-        if( $post->save() ){
-            return new PostResource( $post );
+        $post = Post::find( $request->id );
+        if( $post ){
+            $post->title = $request->input('title') ? $request->input('title') : $post->title;
+            $post->author = $request->input('author') ? $request->input('author') : $post->author;
+            $post->content = $request->input('content') ? $request->input('content') : $post->content;
+            $post->tags = $request->has('tags') ? json_encode($request->input('tags')) : $post->tags;
+            $post->save();
+            return response()->json($post, 200);
+        } else{
+            return response()->json([
+                "message" => "Registro de id = $id não foi encontrado"
+              ], 404);
         }
     }
 
@@ -90,9 +110,16 @@ class PostController extends Controller
      */
     public function destroy($id)
     {
-        $post = Post::findOrFail( $id );
-        if( $post->delete() ){
-            return new PostResource( $post );
+        $post = Post::find( $id );
+        if ($post){
+            $post->delete();
+            return response()->json([
+                "message" => "Registro de id = $id foi excluído"
+              ], 200);
+        } else{
+            return response()->json([
+                "message" => "Registro de id = $id não foi encontrado"
+              ], 404);
         }
     }
 }
