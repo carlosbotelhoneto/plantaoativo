@@ -2,17 +2,49 @@
 
 <b>Desenvolvedor:</b> Carlos Botelho Neto<br>
 <br>
-1. Criação do projeto<br>
-laravel new carlosbotelhoneto<br>
+
+# Preparação do ambiente
 <br>
-2. Criação do banco de dados (MySQL)<br>
+1. C riação do banco de dados (MySQL)<br>
 mysql -u root -p -e "DROP DATABASE IF EXISTS carlosbotelhoneto;CREATE DATABASE carlosbotelhoneto"<br>
 <br>
-3. Configuração do acesso ao banco<br>
+2. Configuração do acesso ao banco<br>
 - Abrir o arquivo .env na pasta raiz do projeto<br>
 - Informar a senha de acesso ao banco na linha 16<br>
     - DB_PASSWORD=senha<br>
 <br>
-4. Executar a migrações<br>
+3. Executar as migrações para criação das tabelas no banco de dados<br>
 - php artisan migrate<br>
 
+# Utilização da API
+<br>
+Listar todas as postagens:<br>
+- Método: GET<br>
+- URL: /api/posts/<br>
+<br>
+Cadastrar postagem
+- Método: POST<br>
+- URL: api/post/<br>
+- Headers:<br>
+    - Key: Content-Type<br>
+    - Value: application/json<br>
+- Body:<br>
+    - Type: raw<br>
+    - Content: conteudo da postagem em formado JSON<br>
+<br>    
+Filtrar postagem utilizando a busca pela ID<br>
+- Método: GET<br>
+- URL: /api/post/{id}<br>
+<br>
+Alterar postagem da ID informada:<br>
+- Método: PUT<br>
+- URL: api/post/{id}<br>
+- Headers:<br>
+    - Key: Content-Type<br>
+    - Value: application/json<br>
+- Body:<br>
+    - Type: raw<br>
+<br>
+Excluir postagem da ID informada<br>
+- Método: PUT<br>
+- URL: api/post/{id}<br>

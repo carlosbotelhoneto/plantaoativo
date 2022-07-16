@@ -14,7 +14,7 @@ class PostController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(){
-        $posts = Post::paginate(25);
+        $posts = Post::all();
         return PostResource::collection($posts);
     }
 
