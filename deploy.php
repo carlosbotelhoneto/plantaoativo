@@ -22,9 +22,9 @@ add('writable_dirs', []);
 
 // Hosts
 
-host('ubuntu@144.22.128.216')
+host('ubuntu@152.67.55.78')
     ->identityFile('/Users/carlosbotelhoneto/Sites/navi/cloud/ssh-key-2022-06-14.key')
-    ->set('deploy_path', '/var/www/cinforms');
+    ->set('deploy_path', '/var/www/html/plantaoativo');
     
 // Tasks
 
