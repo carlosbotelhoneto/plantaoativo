@@ -33,7 +33,7 @@ Cadastrar postagem
     - Type: raw<br>
     - Content: conteudo da postagem em formado JSON<br>
 <br>    
-Filtrar postagem utilizando a busca pela ID<br>
+Filtrar postagem utilizando a busca pela ID (não solicitada)<br>
 - Método: GET<br>
 - URL: /api/post/{id}<br>
 <br>
