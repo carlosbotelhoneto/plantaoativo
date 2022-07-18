@@ -1,0 +1,189 @@
+swagger: "2.0"
+info:
+  description: "Aplicação CMS (Content Management System). A aplicação é um repositório para gerenciar postagens com seus respectivos títulos, autores, conteúdos e tags."
+  version: "1.0.0"
+  title: "API - Carlos Botelho Neto"
+  termsOfService: "http://swagger.io/terms/"
+  contact:
+    email: "carlosbotelhoneto@outlook.com"
+  license:
+    name: "Apache 2.0"
+    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+host: "localhost:8000"
+basePath: "/"
+tags:
+- name: "posts"
+  description: "Acesso as opções de uso da API"
+  externalDocs:
+    description: "Find out more about our store"
+    url: "http://swagger.io"
+schemes:
+- "http"
+paths:
+  /post:
+    post:
+      tags:
+      - "post"
+      summary: "Cadastrar uma nova postagem"
+      description: ""
+      operationId: "addPost"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "header"
+        name: "Content-type: application/json"
+        type: "string"
+      - in: "body"
+        name: "body"
+        description: "Cadastrar uma nova postagem"
+        required: true
+        schema:
+          $ref: "#/definitions/Post"
+      responses:
+        "201":
+          description: "Cadastrado com sucesso"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Post"  
+        "404":
+          description: "Não foi possível cadastrar a postagem"
+  /posts:
+    get:
+      tags:
+      - "post"
+      summary: "Listar todas as postagens"
+      description: ""
+      operationId: "showAllPosts"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      responses:
+        "200":
+          description: "Consulta realizada com sucesso"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Post"  
+        "404":
+          description: "Não foi possível localizar a postagem"
+  /post/{id}:
+    get:
+      tags:
+      - "post"
+      summary: "Exibir os dados de uma postagem pela ID"
+      description: ""
+      operationId: "getPostById"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "ID de uma postagem"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        "200":
+          description: "Postagem localizada"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Post"  
+        "404":
+          description: "Não foi possível localizar a postagem"
+    delete:
+      tags:
+      - "post"
+      summary: "Excluir uma postagem"
+      description: ""
+      operationId: "deletePost"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "ID da postagem a ser excluída"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        "200":
+          description: "Registro excluído com sucesso"
+        "404":
+          description: "Não foi possível localizar a postagem"
+  /post/tag/{tag}:
+    get:
+      tags:
+      - "post"
+      summary: "Exibir os dados de uma postagem pela TAG"
+      description: ""
+      operationId: "getPostByTag"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "tag"
+        in: "path"
+        description: "TAG de uma postagem"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        "200":
+          description: "Postagem localizada"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Post"  
+        "404":
+          description: "Não foi possível localizar a postagem"
+definitions:
+  Post:
+    type: "object"
+    required:
+    - "title"
+    - "author"
+    - "content"
+    - "tags"
+    properties:
+      id:
+        type: "integer"
+        format: "int32"
+        description: "Gerado pelo sistema"
+      title:
+        type: "string"
+        description: "Título da postagem"
+        example: "Notion"
+      author:
+        type: "string"
+        description: "Autor da postagem"
+        example: "Marcia Thiel"
+      content:
+        type: "string"
+        description: "Conteúdo da postagem"
+        example: "Sed soluta nemo et consectetur reprehenderit ea reprehenderit sit. Aut voluptate..."
+      tags:
+        type: "string"
+        description: "Tags"
+        format: "json"
+        example: [api,json,schema,node,github,rest]
+  ApiResponse:
+    type: "object"
+    properties:
+      code:
+        type: "integer"
+        format: "int32"
+      type:
+        type: "string"
+      message:
+        type: "string"
+externalDocs:
+  description: "Find out more about Swagger"
+  url: "http://swagger.io"

@@ -16,7 +16,8 @@ mysql -u root -p -e "DROP DATABASE IF EXISTS carlosbotelhoneto;CREATE DATABASE c
 3. Executar as migrações para criação das tabelas no banco de dados<br>
 - php artisan migrate<br>
 
-# Utilização da API
+# Documentação da API (Swagger)
+URL: http://localhost:8000/docs<br>
 <br>
 Listar todas as postagens:<br>
 - Método: GET<br>

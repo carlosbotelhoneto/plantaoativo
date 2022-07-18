@@ -33,10 +33,10 @@ class PostController extends Controller
         $post->tags = json_encode($request->input('tags'));
 
         if( $post->save() ){
-            return response()->json($post, 201);
+            return response()->json($post, 200);
         } else{
             return response()->json([
-                "message" => "Não foi possíve cadastrar a postagem"
+                "message" => "Não foi possível cadastrar a postagem"
               ], 404);
         }
     }
@@ -97,7 +97,7 @@ class PostController extends Controller
             return response()->json($post, 200);
         } else{
             return response()->json([
-                "message" => "Registro de id = $id não foi encontrado"
+                "message" => "Não foi possível localizar a postagem"
               ], 404);
         }
     }
@@ -114,11 +114,11 @@ class PostController extends Controller
         if ($post){
             $post->delete();
             return response()->json([
-                "message" => "Registro de id = $id foi excluído"
+                "message" => "Registro excluído com sucesso"
               ], 200);
         } else{
             return response()->json([
-                "message" => "Registro de id = $id não foi encontrado"
+                "message" => "Não foi possível localizar a postagem"
               ], 404);
         }
     }
